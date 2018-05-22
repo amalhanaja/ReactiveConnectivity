@@ -13,10 +13,10 @@ import android.telephony.TelephonyManager
  * Email : amalhanaja@gmail.com
  * Github: https://github.com/amalhanaja/
  */
-fun Context.getConnectivityManager(): ConnectivityManager =
+internal fun Context.getConnectivityManager(): ConnectivityManager =
         getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-fun Context.getPowerManager(): PowerManager =
+internal fun Context.getPowerManager(): PowerManager =
         getSystemService(Context.POWER_SERVICE) as PowerManager
 
 val ConnectivityManager.connectivityType: ConnectivityType

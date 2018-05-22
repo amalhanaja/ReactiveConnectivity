@@ -23,7 +23,7 @@ import io.reactivex.functions.Action
  * Email : amalhanaja@gmail.com
  * Github: https://github.com/amalhanaja/
  */
-object ConnectivityObserverFactory {
+internal object ConnectivityObserverFactory {
 
     @RequiresApi(Build.VERSION_CODES.M)
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)

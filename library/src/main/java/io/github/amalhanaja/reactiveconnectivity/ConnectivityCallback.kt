@@ -17,7 +17,7 @@ import io.reactivex.ObservableEmitter
  * Github: https://github.com/amalhanaja/
  */
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-class ConnectivityCallback(private val context: Context, private val emitter: ObservableEmitter<ConnectivityType>):
+internal class ConnectivityCallback(private val context: Context, private val emitter: ObservableEmitter<ConnectivityType>):
         ConnectivityManager.NetworkCallback() {
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     override fun onCapabilitiesChanged(network: Network?, networkCapabilities: NetworkCapabilities?) {

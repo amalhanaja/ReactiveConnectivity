@@ -14,7 +14,7 @@ import io.reactivex.ObservableEmitter
  * Email : amalhanaja@gmail.com
  * Github: https://github.com/amalhanaja/
  */
-class IdleReceiver(private val emitter: ObservableEmitter<ConnectivityType>): BroadcastReceiver() {
+internal class IdleReceiver(private val emitter: ObservableEmitter<ConnectivityType>): BroadcastReceiver() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)

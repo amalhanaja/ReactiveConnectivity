@@ -12,8 +12,9 @@ import io.reactivex.ObservableEmitter
  * Email : amalhanaja@gmail.com
  * Github: https://github.com/amalhanaja/
  */
-class ConnectivityReceiver
-constructor(private val emitter: ObservableEmitter<ConnectivityType>): BroadcastReceiver() {
+internal class ConnectivityReceiver constructor(
+        private val emitter: ObservableEmitter<ConnectivityType>
+): BroadcastReceiver() {
 
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     override fun onReceive(context: Context?, p1: Intent?) {
