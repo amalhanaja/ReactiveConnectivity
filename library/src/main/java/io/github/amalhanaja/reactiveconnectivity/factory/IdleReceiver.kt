@@ -1,4 +1,4 @@
-package io.github.amalhanaja.reactiveconnectivity.library.factory
+package io.github.amalhanaja.reactiveconnectivity.factory
 
 import android.Manifest
 import android.content.BroadcastReceiver

@@ -6,7 +6,7 @@ import android.os.Build
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import android.support.annotation.RequiresPermission
-import io.github.amalhanaja.reactiveconnectivity.library.factory.ConnectivityObserverFactory
+import io.github.amalhanaja.reactiveconnectivity.factory.ConnectivityObserverFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
