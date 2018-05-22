@@ -27,8 +27,12 @@ class ReactiveConnectivity
 
         @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
         fun buildObserver(context: Context): Observable<ConnectivityType> = when {
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> ConnectivityObserverFactory.createMarsmallowObserver(context)
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP -> ConnectivityObserverFactory.createLollipopObserver(context)
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ->
+                ConnectivityObserverFactory.createMarsmallowObserver(context)
+
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ->
+                ConnectivityObserverFactory.createLollipopObserver(context)
+
             else -> ConnectivityObserverFactory.createPreLollipopObserver(context)
         }
     }
