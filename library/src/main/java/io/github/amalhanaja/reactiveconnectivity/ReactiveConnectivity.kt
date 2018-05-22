@@ -15,11 +15,10 @@ import io.reactivex.schedulers.Schedulers
  * Email : amalhanaja@gmail.com
  * Github: https://github.com/amalhanaja/
  */
-class ReactiveConnectivity
-(
+class ReactiveConnectivity constructor(
         private val context: Context,
         private val onChange: (ConnectivityType) -> Unit,
-        private val onError: ((e: Throwable) -> Unit)? = null
+        private val onError: (e: Throwable) -> Unit = { it.printStackTrace() }
 ) {
     private var disposable: Disposable? = null
 
@@ -43,7 +42,7 @@ class ReactiveConnectivity
                 .distinctUntilChanged()
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ onChange.invoke(it) }) { onError?.invoke(it) ?: it.printStackTrace() }
+                .subscribe({ onChange.invoke(it) }) { onError.invoke(it) }
     }
 
     fun dispose() {
