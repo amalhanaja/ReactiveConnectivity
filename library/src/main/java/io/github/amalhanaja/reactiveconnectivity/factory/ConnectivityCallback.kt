@@ -2,7 +2,12 @@ package io.github.amalhanaja.reactiveconnectivity.library.factory
 
 import android.Manifest
 import android.content.Context
-import android.net.*
+import android.net.ConnectivityManager
+import android.net.LinkProperties
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.support.annotation.RequiresPermission
 import io.github.amalhanaja.reactiveconnectivity.ConnectivityType
 import io.github.amalhanaja.reactiveconnectivity.getConnectivityManager
@@ -14,7 +19,9 @@ import io.reactivex.ObservableEmitter
  * Email : amalhanaja@gmail.com
  * Github: https://github.com/amalhanaja/
  */
-class ConnectivityCallback(private val context: Context, private val emitter: ObservableEmitter<ConnectivityType>): ConnectivityManager.NetworkCallback() {
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+class ConnectivityCallback(private val context: Context, private val emitter: ObservableEmitter<ConnectivityType>):
+        ConnectivityManager.NetworkCallback() {
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     override fun onCapabilitiesChanged(network: Network?, networkCapabilities: NetworkCapabilities?) {
         emitter.onNext(context.getConnectivityManager().getNetworkType())
