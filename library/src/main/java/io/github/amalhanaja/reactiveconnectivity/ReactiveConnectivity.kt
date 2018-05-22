@@ -3,10 +3,10 @@ package io.github.amalhanaja.reactiveconnectivity
 import android.Manifest
 import android.content.Context
 import android.os.Build
-import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
 import android.support.annotation.RequiresPermission
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 
@@ -16,10 +16,13 @@ import io.reactivex.schedulers.Schedulers
  * Github: https://github.com/amalhanaja/
  */
 class ReactiveConnectivity
-    (private val context: Context,
-     private val onChange: (ConnectivityType) -> Unit,
-     private val onError: ((e: Throwable)  -> Unit)? = null){
+(
+        private val context: Context,
+        private val onChange: (ConnectivityType) -> Unit,
+        private val onError: ((e: Throwable) -> Unit)? = null
+) {
     private var disposable: Disposable? = null
+
     companion object {
 
         @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
@@ -29,16 +32,17 @@ class ReactiveConnectivity
             else -> ConnectivityObserverFactory.createPreLollipopObserver(context)
         }
     }
+
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    fun subscribe(){
+    fun subscribe() {
         disposable = buildObserver(context)
                 .distinctUntilChanged()
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ onChange.invoke(it) }){ onError?.invoke(it) ?: it.printStackTrace() }
+                .subscribe({ onChange.invoke(it) }) { onError?.invoke(it) ?: it.printStackTrace() }
     }
 
-    fun dispose(){
+    fun dispose() {
         disposable?.dispose()
     }
 }

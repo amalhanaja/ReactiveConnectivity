@@ -14,11 +14,12 @@ import android.telephony.TelephonyManager
  * Github: https://github.com/amalhanaja/
  */
 fun Context.getConnectivityManager(): ConnectivityManager =
-    getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
 fun Context.getPowerManager(): PowerManager =
         getSystemService(Context.POWER_SERVICE) as PowerManager
 
-val ConnectivityManager.connectivityType : ConnectivityType
+val ConnectivityManager.connectivityType: ConnectivityType
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     get() = when {
         this.activeNetworkInfo != null && this.activeNetworkInfo.isConnectedOrConnecting ->

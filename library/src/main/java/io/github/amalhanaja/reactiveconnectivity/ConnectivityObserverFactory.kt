@@ -27,7 +27,7 @@ object ConnectivityObserverFactory {
 
     @RequiresApi(Build.VERSION_CODES.M)
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    fun createMarsmallowObserver(context: Context): Observable<ConnectivityType>{
+    fun createMarsmallowObserver(context: Context): Observable<ConnectivityType> {
         val manager = context.getConnectivityManager()
         val idleFilter = IntentFilter(PowerManager.ACTION_DEVICE_IDLE_MODE_CHANGED)
         val networkRequest = NetworkRequest.Builder().apply {
@@ -42,12 +42,12 @@ object ConnectivityObserverFactory {
             it.setDisposable(Disposables.fromAction {
                 try {
                     manager.unregisterNetworkCallback(callback)
-                } catch (e: Exception){
+                } catch (e: Exception) {
                     it.onError(Exception("Couldn't Unregister Network Callback", e))
                 }
                 try {
                     context.unregisterReceiver(idleReceiver)
-                } catch (e: Exception){
+                } catch (e: Exception) {
                     it.onError(Exception("Couldn't Unregister IDLE "))
                 }
             })
@@ -57,7 +57,7 @@ object ConnectivityObserverFactory {
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    fun createLollipopObserver(context: Context): Observable<ConnectivityType>{
+    fun createLollipopObserver(context: Context): Observable<ConnectivityType> {
         val manager = context.getConnectivityManager()
         return Observable.create {
             val callback = ConnectivityCallback(context, it)
@@ -65,7 +65,7 @@ object ConnectivityObserverFactory {
             it.setDisposable(Disposables.fromAction {
                 try {
                     manager.unregisterNetworkCallback(callback)
-                } catch (e: Exception){
+                } catch (e: Exception) {
                     it.onError(Exception("Couldn't Unregister Network Callback", e))
                 }
             })
@@ -92,13 +92,15 @@ object ConnectivityObserverFactory {
     private fun <T> disposeInUiThread(emitter: ObservableEmitter<T>, action: Action): Disposable {
         return Disposables.fromAction {
             when {
-                Looper.getMainLooper() == Looper.myLooper() -> { action.run() }
+                Looper.getMainLooper() == Looper.myLooper() -> {
+                    action.run()
+                }
                 else -> {
                     val inner = AndroidSchedulers.mainThread().createWorker()
                     inner.schedule {
                         try {
                             action.run()
-                        } catch (e: Exception){
+                        } catch (e: Exception) {
                             e.printStackTrace()
                             emitter.onError(Exception("Could not unregister receiver in UI Thread", e))
                         } finally {

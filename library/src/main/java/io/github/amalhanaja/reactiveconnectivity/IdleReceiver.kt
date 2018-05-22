@@ -20,7 +20,7 @@ class IdleReceiver(private val emitter: ObservableEmitter<ConnectivityType>): Br
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     override fun onReceive(p0: Context?, p1: Intent?) {
         p0?.let {
-            if (isIdle(it)){
+            if (isIdle(it)) {
                 emitter.onNext(it.getConnectivityManager().connectivityType)
             } else {
                 emitter.onNext(it.getConnectivityManager().connectivityType)
@@ -31,6 +31,6 @@ class IdleReceiver(private val emitter: ObservableEmitter<ConnectivityType>): Br
     @RequiresApi(Build.VERSION_CODES.M)
     private fun isIdle(context: Context): Boolean {
         val manager = context.getPowerManager()
-        return manager.isDeviceIdleMode && !manager.isIgnoringBatteryOptimizations(context.packageName)
+        return manager.isDeviceIdleMode && ! manager.isIgnoringBatteryOptimizations(context.packageName)
     }
 }

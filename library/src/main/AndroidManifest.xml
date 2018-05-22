@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.github.amalhanaja.reactiveconnectivity" />
+<manifest package="io.github.amalhanaja.reactiveconnectivity" />
