@@ -42,7 +42,7 @@ class ReactiveConnectivity constructor(
                 .distinctUntilChanged()
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ onChange.invoke(it) }) { onError.invoke(it) }
+                .subscribe(onChange::invoke, onError::invoke)
     }
 
     fun dispose() {
