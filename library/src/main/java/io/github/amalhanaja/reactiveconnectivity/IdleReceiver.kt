@@ -21,9 +21,9 @@ class IdleReceiver(private val emitter: ObservableEmitter<ConnectivityType>): Br
     override fun onReceive(p0: Context?, p1: Intent?) {
         p0?.let {
             if (isIdle(it)){
-                emitter.onNext(it.getConnectivityManager().getNetworkType())
+                emitter.onNext(it.getConnectivityManager().connectivityType)
             } else {
-                emitter.onNext(it.getConnectivityManager().getNetworkType())
+                emitter.onNext(it.getConnectivityManager().connectivityType)
             }
         }
     }

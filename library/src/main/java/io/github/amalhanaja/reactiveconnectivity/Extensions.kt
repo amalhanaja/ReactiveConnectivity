@@ -18,18 +18,18 @@ fun Context.getConnectivityManager(): ConnectivityManager =
 fun Context.getPowerManager(): PowerManager =
         getSystemService(Context.POWER_SERVICE) as PowerManager
 
-@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-fun ConnectivityManager.getNetworkType(): ConnectivityType {
-    return when {
-        this.activeNetworkInfo != null && this.activeNetworkInfo.isConnectedOrConnecting -> getConnectivityType(activeNetworkInfo)
+val ConnectivityManager.connectivityType : ConnectivityType
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    get() = when {
+        this.activeNetworkInfo != null && this.activeNetworkInfo.isConnectedOrConnecting ->
+            activeNetworkInfo.connectivityType
         else -> ConnectivityType.NOT_CONNECTED
     }
-}
 
-private fun getConnectivityType(networkInfo: NetworkInfo): ConnectivityType {
-    return when (networkInfo.type) {
+val NetworkInfo.connectivityType: ConnectivityType
+    get() = when (type) {
         ConnectivityManager.TYPE_WIFI -> ConnectivityType.WIFI
-        ConnectivityManager.TYPE_MOBILE -> when (networkInfo.subtype) {
+        ConnectivityManager.TYPE_MOBILE -> when (subtype) {
             TelephonyManager.NETWORK_TYPE_GPRS, TelephonyManager.NETWORK_TYPE_EDGE,
             TelephonyManager.NETWORK_TYPE_CDMA, TelephonyManager.NETWORK_TYPE_1xRTT,
             TelephonyManager.NETWORK_TYPE_IDEN ->
@@ -53,4 +53,3 @@ private fun getConnectivityType(networkInfo: NetworkInfo): ConnectivityType {
         ConnectivityManager.TYPE_WIMAX -> ConnectivityType.WIMAX
         else -> ConnectivityType.NOT_CONNECTED
     }
-}

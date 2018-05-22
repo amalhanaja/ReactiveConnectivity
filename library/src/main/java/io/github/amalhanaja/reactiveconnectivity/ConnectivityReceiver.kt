@@ -18,7 +18,7 @@ constructor(private val emitter: ObservableEmitter<ConnectivityType>): Broadcast
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     override fun onReceive(context: Context?, p1: Intent?) {
         context?.let {
-            emitter.onNext(it.getConnectivityManager().getNetworkType())
+            emitter.onNext(it.getConnectivityManager().connectivityType)
         }
     }
 }
