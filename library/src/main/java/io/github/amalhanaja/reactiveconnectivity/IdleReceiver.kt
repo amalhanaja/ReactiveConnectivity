@@ -1,4 +1,4 @@
-package io.github.amalhanaja.reactiveconnectivity.factory
+package io.github.amalhanaja.reactiveconnectivity
 
 import android.Manifest
 import android.content.BroadcastReceiver
@@ -7,10 +7,6 @@ import android.content.Intent
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.annotation.RequiresPermission
-import io.github.amalhanaja.reactiveconnectivity.ConnectivityType
-import io.github.amalhanaja.reactiveconnectivity.getConnectivityManager
-import io.github.amalhanaja.reactiveconnectivity.getNetworkType
-import io.github.amalhanaja.reactiveconnectivity.getPowerManager
 import io.reactivex.ObservableEmitter
 
 /**

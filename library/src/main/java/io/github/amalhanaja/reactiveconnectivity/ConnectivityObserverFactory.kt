@@ -1,4 +1,4 @@
-package io.github.amalhanaja.reactiveconnectivity.factory
+package io.github.amalhanaja.reactiveconnectivity
 
 import android.Manifest
 import android.content.Context
@@ -11,8 +11,6 @@ import android.os.Looper
 import android.os.PowerManager
 import android.support.annotation.RequiresApi
 import android.support.annotation.RequiresPermission
-import io.github.amalhanaja.reactiveconnectivity.ConnectivityType
-import io.github.amalhanaja.reactiveconnectivity.getConnectivityManager
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers

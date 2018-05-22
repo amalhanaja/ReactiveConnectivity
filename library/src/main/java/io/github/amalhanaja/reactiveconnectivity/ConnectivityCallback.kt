@@ -1,4 +1,4 @@
-package io.github.amalhanaja.reactiveconnectivity.factory
+package io.github.amalhanaja.reactiveconnectivity
 
 import android.Manifest
 import android.content.Context
