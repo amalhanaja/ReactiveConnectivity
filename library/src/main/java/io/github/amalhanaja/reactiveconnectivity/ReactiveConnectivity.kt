@@ -32,7 +32,7 @@ class ReactiveConnectivity
     }
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     fun subscribe(){
-        disposable = Companion.buildObserver(context)
+        disposable = buildObserver(context)
                 .distinctUntilChanged()
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
