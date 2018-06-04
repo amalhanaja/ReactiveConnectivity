@@ -7,6 +7,7 @@ import android.net.NetworkInfo
 import android.os.PowerManager
 import android.support.annotation.RequiresPermission
 import android.telephony.TelephonyManager
+import io.github.amalhanaja.reactiveconnectivity.ConnectivityType.NOT_CONNECTED
 
 /**
  * Created by Alfian Akmal Hanantio on 12/01/18.
@@ -21,11 +22,7 @@ internal fun Context.getPowerManager(): PowerManager =
 
 val ConnectivityManager.connectivityType: ConnectivityType
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    get() = when {
-        this.activeNetworkInfo != null && this.activeNetworkInfo.isConnectedOrConnecting ->
-            activeNetworkInfo.connectivityType
-        else -> ConnectivityType.NOT_CONNECTED
-    }
+    get() = this.activeNetworkInfo?.run(NetworkInfo::connectivityType) ?: NOT_CONNECTED
 
 val NetworkInfo.connectivityType: ConnectivityType
     get() = when (type) {
